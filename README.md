@@ -1,1 +1,3 @@
 Vue test
+
+gulp watch
