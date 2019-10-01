@@ -1,2 +1,1 @@
-# gulp-base
-my gulp base
+Vue test
