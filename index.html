@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue test</title>
+
+    <style>
+        @import url("public/min/css/test.css")
+    </style>
+</head>
+<body>
+    <!-- v-bind -->
+    <div id="app">
+        <input type="text" :value="message">
+        {{ message }}
+    </div>
+    
+    <!-- v-if -->
+    <div id="app2">
+        <span v-if="seen">seen = true</span>
+        <span v-if="!seen">seen = false</span>
+    </div>
+
+    <!-- v-for -->
+    <div id="app3">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+
+    <!-- handle input -->
+    <div id="app4">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+
+    <!-- v-model -->
+    <div id="app5">
+        <p>{{ message }}</p>
+        <input type="text" v-model="message">
+    </div>
+
+    <!-- template and props-->
+    <div id="app6">
+        <greeter name="Ding"></greeter>
+        <!-- <greeter inline-template></greeter> -->
+    </div>
+
+    <!-- Data and Methods -->
+    <h1>Data and Methods</h1>
+    <div id="app7">
+         <p>{{ foo }}</p>
+        <!-- this will no longer update `foo`! -->
+        <button v-on:click="foo = 'baz'">Change it(Freez)</button>
+    </div>
+
+    <!-- Template Syntax -->
+    <h1>Template Syntax</h1>
+    <div id="app8">
+        <span>Message: {{ msg }}</span><br>
+        <!-- *v-once -->
+        <span v-once>[v-once]This will never change: {{ msg }}</span>
+        <!-- *v-html (Raw HTML) -->
+        <p>Using mustaches: {{ rawHtml }}</p>
+        <p>Using v-html : <span v-html="rawHtml"></span></p>
+        <!-- *v-bind  v-bind:disabled = :disabled (Attributes) -->
+        <button :disabled="isButtonDisabled">Button</button>
+        <!-- *Using JavaScript Expressions -->
+        <h2>Using JavaScript Expressions</h2>
+        <p>{{ number + 1 }}</p>
+        <p>{{ 1==1 ? 'YES' : 'NO' }} {{ 1==2 ? 'YES' : 'NO' }}</p> <!-- ok為true 回傳第一個 反之回傳第二個 -->
+        <p>{{ msg.split('').reverse().join('') }}</p> <!-- reverse string -->
+        <!-- *Directives -->
+        <h2>Directives</h2>
+        <p v-if="1==1">Now you see me</p>
+        <!-- *Arguments (用v-bind綁定屬性) -->
+        <h2>Arguments</h2>
+        <a v-bind:href="url">URL:{{ url }}</a>
+        <!-- *Modifiers -->
+        <h2>Modifiers</h2>
+        <!-- .prevent = event.preventDefault() 會"阻止原本會發生的事件" 以下會阻止提交表單與重整頁面的事件 -->
+        <form v-on:submit.prevent="onSubmit"> 
+            <button type="submit">Submit</button>
+        </form>
+        <!-- *Shorthands 簡寫 -->
+        <h2>Shorthands</h2>
+        <!-- v-bind -->
+        <!-- full syntax -->
+        <a v-bind:href="url">URL:{{ url }}</a>
+        <!-- shorthand -->
+        <a :href="url">URL:{{ url }}</a>
+        <!-- shorthand with dynamic argument (attr可以自行填入屬性)-->
+        <a :[attr]="url"> [attr]=href URL:{{ url }} </a><br>
+        <!-- v-on Shorthand v-on = @ = @[event] -->
+        <!-- full syntax -->
+        <p v-on:click="doSomething('click full syntax')">full syntax</p>
+        <!-- shorthand -->
+        <p @mouseover="doSomething('mouseover shorthand')">shorthand</p>
+        <!-- shorthand with dynamic argument (2.6.0+) -->
+        <p @[e]="doSomething('event: ' + e)"> shorthand with dynamic argument</p>
+    </div>
+    <div id="app9">
+        <h1>Computed Properties and Watchers</h1>
+        <h2>Computed Properties</h2>
+        <p>Original message: "{{ msg }}"</p>
+        <p>Computed reversed message: "{{ reverseText(msg) }}"</p>
+        <h2>Watch</h2>
+        <p>請輸入使用者名稱</p>
+        <input type="text" v-model="username"> {{ errMsg }}
+    </div>
+    <div id="app10">
+        <h1>Class and Style Bindings</h1>
+        <h2>Class</h2>
+        <div v-bind:class="{'static': isGood, 'text-danger': hasError }">
+            hasError
+        </div>
+        <!-- Use classObject -->
+        <div v-bind:class="classObject">isGood</div>
+        <!-- Use Function return -->
+        <div v-bind:class="classFunction()">Function return</div>
+        <!-- Use Array -->
+        <div v-bind:class="[activeClass, errorClass]">Array</div>
+        <!-- With Component -->
+        <!-- <my-component class="baz boo"></my-component> -->
+        <!-- <my-component v-bind:class="{ active: isActive }"></my-component> -->
+        <h2>Style</h2>
+        <div v-bind:style="{ 'background-color': activeColor, 'font-size': activeFontSize + 'px' }">
+            test style
+        </div>
+        <!-- Multiple Values -->
+        <div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+            Multiple Values
+        </div>
+    </div>
+    <div id="app11">
+        <h1>Conditional Rendering</h1>
+        <div v-if="type === 'A'">A</div>
+        <div v-else-if="type === 'B'">B</div>
+        <div v-else-if="type === 'C'">C</div>
+        <div v-else>Not A/B/C</div>
+    </div>
+    <div id="app12">
+        <h1>List Rendering</h1>
+        <h2>Mapping an Array to Elements with v-for</h2>
+        <!-- v-for="(value, key) in array" -->
+        <!-- v-for="(value, key, index) in object" -->
+        <ul>
+            <li v-for="(item, index) in items">
+                {{ index }} - {{ item.message }}
+            </li>
+        </ul>
+        <h2>v-for with an Object</h2>
+        <ul>
+            <li v-for="(value, key, index) in obj">
+               {{ index }} - {{ key }} - {{ value }}
+            </li>
+        </ul>
+        <h2>Array Change Detection</h2>
+        <!-- Mutation Methods -->
+        <!-- push() pop() shift() unshift() splice() sort() reverse() -->
+        <h2>Replacing an Array</h2>
+        <!-- Vue.set() = vm.$set(), vm.splice() -->
+        <!-- Use Vue.set(app12.items, indexOfItem, newValue) -->
+        <!-- Use app12.$set(app12.items, indexOfItem, newValue) 跟上面效果一樣 -->
+        <!-- Use app12.items.splice(indexOfItem, 1, newValue) -->
+        <button v-on:click="setNewItems()">Set new items</button>
+        <button v-on:click="setOldItems()">Set old items</button>  
+        <button v-on:click="setNewObject()">Set new Object</button>
+        <button v-on:click="setOldObject()">Set old Object</button> 
+    </div>
+    <div id="app13">
+        <h1>Filtered/Sorted Results</h1>
+        <ul>
+            <li v-for="n in numbers">{{ n }}</li>
+        </ul>
+        <h3>Filter Even</h3>
+        <ul>
+            <li v-for="n in even(numbers)">{{ n }}</li>
+        </ul>
+        <h3>v-for with a Range</h3>
+        <div>
+            <span v-for="n in 10">{{ n }} </span>
+        </div>
+    </div>
+    <div id="app14">
+        <h1>Create Add/Remove List</h1>
+        <input type="text" v-model="inputText">
+        <button v-on:click="addNode({ text: inputText })">add</button>
+        <ul>
+            <li v-for="(node, index) in nodes">
+                {{ index }} - {{ node.text }}
+                <button v-on:click="removeNode(node, index)">remove</button>
+            </li>
+        </ul>
+    </div>
+    <div id="app15">
+        <h1>Method Event Handlers</h1>
+        <button v-on:click="clickEvent(event)" id="123123" style="color:red;">Click</button>
+    </div>
+
+    <footer></footer>
+
+    <script src="bower_components/vue/dist/vue.min.js"></script>
+    <script src="public/js/test.js"></script>
+
+    <script>
+        
+    </script>
+
+</body>
+</html>

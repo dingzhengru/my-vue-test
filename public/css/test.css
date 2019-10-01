@@ -1,0 +1,19 @@
+.text-danger{
+    color: white;
+    background-color: red;
+}
+
+.static{}
+
+footer{
+    background-color: gray;
+    /* 設定footer的高度 */
+    height: 0px;
+    box-sizing: border-box;
+    /* 設定footer絕對位置在底部 */
+    position: relative;
+    bottom: 0;
+    /* 展開footer寬度 */
+    width: 100%;
+    margin-top: 50px;
+}
