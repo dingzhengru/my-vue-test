@@ -1,2 +1,3 @@
-# gulp-base
-my gulp base
+Vue test
+
+gulp watch
