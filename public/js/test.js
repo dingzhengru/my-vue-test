@@ -274,17 +274,59 @@ var app14 = new Vue({
     }
 })
 
+// 監聽目前的Scroll位置
+// window.addEventListener('scroll', () => {
+//     let scrollTop = document.documentElement.scrollTop ||
+//                     document.body.scrollTop ||
+//                     document.querySelector('.element').scrollTop;
+//     console.log(scrollTop);
+// }, { passive: true });
+
 var app15 = new Vue({
     el: '#app15',
     data: {
         // all event: https://developer.mozilla.org/en-US/docs/Web/Events
         // all event object: https://www.w3schools.com/jsref/obj_event.asp
-        clickEvent: function(event) {
+        clickEvent: function(mydata, event) {
             console.log(event.type); // click
             console.log(event.target);
             console.log(event.target.tagName); // button
             console.log(event.target.id); // 123123
             console.log(event.target.style.color); // red
         }
+    },
+    methods: {
+        doThis: function(event) {console.log('doThis');},
+        doThat: function(event) {console.log('doThat');},
+        onSubmit: function(event) {console.log('submit')},
+        onScroll: function(event) {
+            // 解決辦法: https://www.itread01.com/content/1547201005.html
+            // 或是直接利用上面的 window.addEventListener('scroll'...
+            console.log('scroll');
+        },
+        onEnter: function(event) {console.log('Enter')},
+        onSpace: function(event) {console.log('Space')},
+        onOnlyCtrl: function(event) { console.log('Only Press Ctrl') },
     }
+})
+var app16 = new Vue({
+    el: '#app16',
+    data: {
+        msg: 'default msg',
+        checkedNames: [],
+        picked: null, 
+        selected: 'default000',
+        checkboxValue: 'this is true-value',
+        radioValue: null,
+        a: '123123',
+        lazyTest: '',
+        numberTest: '',
+        trimTest: '',
+        multiSelected: [],
+    },
+})
+var app17 = new Vue({
+    el: '#app17',
+    data: {
+    },
 })

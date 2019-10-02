@@ -197,9 +197,89 @@
     </div>
     <div id="app15">
         <h1>Method Event Handlers</h1>
-        <button v-on:click="clickEvent(event)" id="123123" style="color:red;">Click</button>
-    </div>
+        <button v-on:click="clickEvent('aaa',event)" id="123123" style="color:red;">Click</button>
+        <h2>Event Modifiers(.stop .prevent .capture .self .once .passive)</h2>
+        <!-- .stop：等同於event.stopPropagation()，防止事件冒泡。 -->
+        <!-- .prevent：等同於event.preventDefault()，防止執行預設的行為。 -->
+        <!-- .capture：與事件冒泡的方向相反，事件捕獲 (event capturing) 是由外而內的。 -->
+        <!-- .self：只會觸發自己範圍內的事件，不包含子元素。 -->
+        <!-- .once：只會觸發一次 -->
+        <!-- 詳細說明(中文): https://cythilya.github.io/2017/04/17/vue-methods-and-event-handling/ -->
+        <!-- 防冒泡: 點內部事件不會觸發外部的，ex:點內部alert不會觸發外部的alert -->
+        <!-- 防止執行預設的行為，ex:表單不會重整網頁、 點擊href="#"網址不會出現#-->
+        <a @click.stop="doThis" href="#">click.stop</a>
+        <form @submit.prevent="doThis">submit.prevent</form>
+        <a @click.stop.prevent="doThat" href="#">click.stop.prevent</a>
+        <form @submit.prevent>submit.prevent</form>
+        <div @click.capture="doThis">click.capture</div>
+        <div @click.self="doThat">click.self</div>
+        <h3>.passive</h3>
+        <!-- the scroll event's default behavior (scrolling) will happen -->
+        <!-- immediately, instead of waiting for `onScroll` to complete  -->
+        <!-- in case it contains `event.preventDefault()`                -->
+        <div @scroll.passive="onScroll">scroll.passive</div>
 
+        <h2>Key Modifiers</h2>
+        <!-- Key的英文名列表: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values -->
+        <input @keyup.enter="onEnter" value="@keyup.enter">
+        <h2>Key Codes</h2>
+        <!-- Key code: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode -->
+        <input @keyup.32="onSpace" value="@keyup.32(space)">
+        <h2>.exact Modifier</h2>
+        <!-- this will only fire when Ctrl and no other keys are pressed -->
+        <input @keyup.ctrl.exact="onOnlyCtrl" value="keyup.ctrl.exact(not working)">
+    </div>
+    <div id="app16">
+        <h1>Form Input Bindings</h1>
+        <input v-model="msg" placeholder="edit me">
+        <p>Message is: {{ msg }}</p>
+        <h2>Checkbox</h2>
+        <input type="checkbox" id="jack" value="value-Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="value-John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="value-Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <p>Checked names: {{ checkedNames }}</p>
+        <h2>Radio</h2>
+        <input type="radio" id="one" value="value-One" v-model="picked">
+        <label for="one">One</label>
+        <input type="radio" id="two" value="value-Two" v-model="picked">
+        <label for="two">Two</label>
+        <p>Picked: {{ picked }}</p>
+        <h2>Select</h2>
+        <select v-model="selected">
+            <option disabled selected value="default000">Please select one</option>
+            <option value="value-A">A</option>
+            <option value="value-B">B</option>
+            <option value="value-C">C</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+        <h2>Value Bindings</h2>
+        <input type="checkbox" v-model="checkboxValue" true-value="this is true-value" false-value="this is false-value">
+        checkboxValue: {{ checkboxValue }}
+        <input type="radio" v-model="radioValue" v-bind:value="a">
+        radioValue {{ radioValue }}
+        <h3>Multi Select</h3>
+        利用Ctrl or Shift多選 <br>
+        <select v-model="multiSelected" multiple>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        multiSelected = {{ multiSelected }}
+        <h2>Modifiers 修飾符</h2>
+        <!-- .lazy 使用.lazy會改用 change 事件監聽 -->
+        <!-- ex: 更改 input 內的值並不會馬上變更 model 的資料，而是等到滑鼠移到輸入框外 -->
+        <!-- .number 將字串轉為數字。 -->
+        <!-- .trim 去除首尾空白。 -->
+        <p><input v-model.lazy="lazyTest"> v-model.lazy: {{ lazyTest }}<p/>
+        <p><input v-model.lazy.number="numberTest"> v-model.number: {{ numberTest }} {{ typeof(numberTest) }}<p/>
+        <p><input v-model.lazy.trim="trimTest"> v-model.trim: {{ trimTest }}<p/>
+    </div>
+    <div id="app17">
+        <h1>Components Basics</h1>
+    </div>
     <footer></footer>
 
     <script src="bower_components/vue/dist/vue.min.js"></script>
