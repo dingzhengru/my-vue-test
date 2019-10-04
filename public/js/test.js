@@ -325,8 +325,73 @@ var app16 = new Vue({
         multiSelected: [],
     },
 })
+
+// *component的data 一定要是function
+// 如果不這樣做 重複使用就會有資料共用的問題 https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function
+Vue.component('button-counter', {
+    data: function () {
+        return {
+            count: 0
+        }
+    },
+    template: `<button v-on:click="count++">
+                  You clicked me {{ count }} times.
+               </button>`
+})
+
+Vue.component('blog-post', {
+    props: ['title', 'id'],
+    template: '<h3>Title: {{ id }} {{ title }}</h3>'
+})
+
+Vue.component('good-blog-post', {
+    props: ['post'],
+    template: `
+        <div class="blog-post">
+            <h3>{{ post.title }}</h3>
+            <div v-html="post.content"></div>
+        </div>
+    `
+})
+Vue.component('event-blog-post', {
+    props: ['post'],
+    template: `
+        <div class="blog-post">
+            <button v-on:click="$emit('enlarge-text', 2)">Enlarge text</button>
+        </div>
+    `
+})
+
+// input是自定義的事件
+Vue.component('custom-input', {
+  props: ['value'],
+  template: `
+    <input
+      v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
+    >
+  `
+})
+
 var app17 = new Vue({
     el: '#app17',
     data: {
+        postFontSize: 1,
+        posts: [
+            { id: 1, title: 'title1', content: 'content1' },
+        ],
+        searchText: '123123'
+    },
+    methods: {
+        onEnlargeText: function (enlargeAmount) {
+            this.postFontSize += enlargeAmount
+        }
+    }
+})
+
+var app18 = new Vue({
+    el: '#app18',
+    data: {
+        
     },
 })

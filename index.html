@@ -279,7 +279,58 @@
     </div>
     <div id="app17">
         <h1>Components Basics</h1>
+        <h3>data必須要用function 避免資料共用問題</h3>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <h1>Passing Data to Child Components with Props</h1>
+        <blog-post title="My journey with Vue"></blog-post>
+        <blog-post title="Blogging with Vue"></blog-post>
+        <blog-post title="Why Vue is so fun"></blog-post>
+        <h1>Use v-... in Components</h1>
+        <blog-post
+            v-for="post in posts"
+            v-bind:id="post.id"
+            v-bind:title="post.title"
+        ></blog-post>
+        <h2>Good Components</h2>
+        <good-blog-post
+            v-for="post in posts"
+            v-bind:id="post.id"
+            v-bind:post="post"
+        ></good-blog-post>
+        <h1>Listening to Child Components Events</h1>
+        <div :style="{ 'font-size': postFontSize + 'em' }">
+            <event-blog-post
+                v-for="post in posts"
+                v-bind:id="post.id"
+                v-bind:post="post"
+                v-on:enlarge-text="onEnlargeText"
+            ></event-blog-post>
+            {{ postFontSize }}
+        </div>
+        <h2>Using v-model on Components</h2>
+        <custom-input v-model="searchText"></custom-input>
     </div>
+    <div class="app18">
+        <h1>Component Registration</h1>
+        <h2>Component Names(Component的命名)</h2>
+        <p>有兩種命名方式</p>
+        <p>kebab-case: my-component-name</p>
+        <p>PascalCase: MyComponentName</p>
+        <p>兩者都可以使用，但前者對DOM直接有效(valid directly in the DOM)</p>
+        <h2>Global Registration</h2>
+        Vue.component('component-a', { /* ... */ })<br>
+        Vue.component('component-b', { /* ... */ })<br>
+        Vue.component('component-c', { /* ... */ })
+        <h2>Local Registration</h2>
+        new Vue({
+            el: '#app',
+            components: {
+                'component-a': ComponentA,
+                'component-b': ComponentB
+            }
+        })
+        
     <footer></footer>
 
     <script src="bower_components/vue/dist/vue.min.js"></script>
