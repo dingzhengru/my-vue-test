@@ -240,12 +240,37 @@ var app12 = new Vue({
 var app13 = new Vue({
     el: '#app13',
     data: {
+        searchText: '123',
         numbers: [1,2,3,4,5,6,7,8,9],
+        products: [
+            {
+                name: 'cookie',
+                price: 100
+            },
+            {
+                name: 'tea',
+                price: 200
+            },
+        ],
+        
     }, 
+    computed: {
+        productsFilter: function () {
+            return this.searchProductsByAll(this.searchText);
+        }
+    },
     methods:{
         even: function(list) {
             return list.filter(function (n) {
                 return n % 2 === 0;
+            })
+        },
+        searchProductsByAll: function(searchText) {
+            return this.products.filter(function(p) {
+                for(let x in p) {
+                    console.log(String(p[x]), searchText, String(p[x]).includes(searchText));
+                    if(String(p[x]).includes(searchText)) return p;
+                }
             })
         }
     }

@@ -183,6 +183,13 @@
         <div>
             <span v-for="n in 10">{{ n }} </span>
         </div>
+        <h1>Search</h1>
+        <input v-model="searchText">
+        <ul>
+            <li v-for="(product,index) in productsFilter">
+                {{ index }} {{ product.name }}
+            </li>
+        </ul>
     </div>
     <div id="app14">
         <h1>Create Add/Remove List</h1>
@@ -334,7 +341,7 @@
     <footer></footer>
 
     <script src="bower_components/vue/dist/vue.min.js"></script>
-    <script src="public/min/js/test.js"></script>
+    <script src="public/js/test.js"></script>
 
     <script>
         
