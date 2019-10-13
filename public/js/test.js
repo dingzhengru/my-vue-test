@@ -240,7 +240,7 @@ var app12 = new Vue({
 var app13 = new Vue({
     el: '#app13',
     data: {
-        searchText: '123',
+        searchText: '',
         numbers: [1,2,3,4,5,6,7,8,9],
         products: [
             {
@@ -417,6 +417,12 @@ var app17 = new Vue({
 var app18 = new Vue({
     el: '#app18',
     data: {
-        
+    },
+})
+
+var app19 = new Vue({
+    el: '#app19',
+    data: {
+        show: false,
     },
 })

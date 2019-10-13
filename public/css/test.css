@@ -17,3 +17,47 @@ footer{
     width: 100%;
     margin-top: 100px;
 }
+
+/* Animation */
+.anime-test {
+    height: 100px;
+    background-color: red;
+}
+
+
+@keyframes show{
+    from { 
+        height: 0px;
+        opacity: 0; 
+    }
+    to {
+        height: 100px;
+        opacity: 1;
+    }
+}
+
+@keyframes hide{
+    from { 
+        height: 100px;
+        opacity: 1; 
+    }
+    to { 
+        height: 0px;
+        opacity: 0; 
+    }
+}
+
+.slide-enter-active {
+  animation: show 0.5s;
+}
+
+.slide-leave-active {
+  animation: hide 0.5s;
+}
+/*
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}*/

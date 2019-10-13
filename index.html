@@ -318,7 +318,7 @@
         <h2>Using v-model on Components</h2>
         <custom-input v-model="searchText"></custom-input>
     </div>
-    <div class="app18">
+    <div id="app18">
         <h1>Component Registration</h1>
         <h2>Component Names(Component的命名)</h2>
         <p>有兩種命名方式</p>
@@ -337,7 +337,23 @@
                 'component-b': ComponentB
             }
         })
-
+    </div>
+    <div id="app19">
+        <h1>Animation</h1>
+        <div id="demo">
+            <button v-on:click="show = !show">
+                Toggle
+            </button>
+<!--             <transition name="fade">
+                <p v-if="show">hello </p>
+            </transition> -->
+            <transition 
+                 enter-active-class="slide-enter-active" 
+                 leave-active-class="slide-leave-active">
+                <p v-if="show" class="anime-test">hello </p>
+            </transition>
+        </div>
+    </div>
     <footer></footer>
 
     <script src="bower_components/vue/dist/vue.min.js"></script>
@@ -349,3 +365,5 @@
 
 </body>
 </html>
+
+
