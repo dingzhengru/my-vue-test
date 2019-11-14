@@ -127,7 +127,7 @@ const app = new Vue({
 })
 ```
 
-## Component 的內外部互動($emit)
+## 接取Component的資料($emit)
 **app可以透過設置屬性來傳資料給component，那麼反過來呢，component要如何傳資料給app**  
 *  component可以透過$emit()來傳資料給app(在template跟component app中都可以調用)
 *  $emit('事件名稱', 參數) or this.$emit
