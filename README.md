@@ -6,9 +6,7 @@
 *  <a href="#v-on">v-on</a>
 *  <a href="#v-model">v-model</a>
 *  <a href="#Component">Component</a>
-*  <a href="#Component-的內外部互動$emit">Component 的內外部互動($emit)</a>
-*  <a href="#v-bind">v-bind</a>
-*  <a href="#v-bind">v-bind</a>
+*  <a href="#component-的內外部互動emit">Component 的內外部互動($emit)</a>
 
 ```
 const app = new Vue({
@@ -132,9 +130,10 @@ const app = new Vue({
 ## Component 的內外部互動($emit)
 **app可以透過設置屬性來傳資料給component，那麼反過來呢，component要如何傳資料給app**  
 *  component可以透過$emit()來傳資料給app(在template跟component app中都可以調用)
-*  $emit('事件名稱', 參數)
-*  template中直接用事件設置，@click="$emit('Event', payload)"
-*  component app中調用，this.$emit('Event', payload)
+*  $emit('事件名稱', 參數) or this.$emit
+*  template中直接用事件設置，@click="$emit('event-name', payload)"
+*  component app中調用，this.$emit('event-name', payload)
+*  接component資料時，設置屬性並用方法去接，@event-name="doSomething"
 html  
 ```
 <event-blog-post
