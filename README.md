@@ -6,7 +6,7 @@
 *  <a href="#v-on">v-on</a>
 *  <a href="#v-model">v-model</a>
 *  <a href="#Component">Component</a>
-*  <a href="#component-的內外部互動emit">Component 的內外部互動($emit)</a>
+*  <a href="#接取component的資料emit">接取Component的資料($emit)</a>
 
 ```
 const app = new Vue({
