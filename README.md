@@ -39,7 +39,8 @@ const app = new Vue({
 ```
 
 ## 生命週期
-<img src="https://i.imgur.com/fCQYMmm.png" height="300">  
+<img src="https://i.imgur.com/fCQYMmm.png" height="300">
+來源: https://vuejs.org/v2/guide/instance.html  
 
 ## v-bind
 *  給予屬性值(非雙向綁定，雙向綁定要用v-model)
