@@ -39,7 +39,7 @@ const app = new Vue({
 ```
 
 ## 生命週期
-<img src="https://i.imgur.com/fCQYMmm.png" height="500">
+<img src="https://i.imgur.com/fCQYMmm.png" height="700">
 來源: https://vuejs.org/v2/guide/instance.html  
 
 ## v-bind
