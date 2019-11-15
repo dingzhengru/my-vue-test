@@ -1,10 +1,12 @@
 # Vue test
 
+*  <a href="生命週期">生命週期</a>
 *  <a href="#v-bind">v-bind</a>
 *  <a href="#v-if">v-if</a>
 *  <a href="#v-for">v-for</a>
 *  <a href="#v-on">v-on</a>
 *  <a href="#v-model">v-model</a>
+*  <a href="#watch">watch</a>
 *  <a href="#Component">Component</a>
 *  <a href="#接取component的資料emit">接取Component的資料($emit)</a>
 
@@ -35,6 +37,9 @@ const app = new Vue({
     destory: function(){ console.log('destory'); },
 });
 ```
+
+## 生命週期
+<img src="https://i.imgur.com/fCQYMmm.png" height="300">  
 
 ## v-bind
 *  給予屬性值(非雙向綁定，雙向綁定要用v-model)
@@ -91,6 +96,22 @@ const app = new Vue({
 ```
 <input v-model="message">
 {{ message }}
+```
+
+## watch
+監控某個值，有變化就執行
+```
+const app = new Vue({
+    el: '#app',
+    data: { 
+        username: ''
+    },
+    watch: {
+        username: function(newValue, oldValue) {
+            // ...
+        }
+    }
+}
 ```
 
 ## Component
