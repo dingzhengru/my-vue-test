@@ -102,7 +102,7 @@ const app = new Vue({
 ```
 
 ## computed
-回傳運算過後的結果(不接收/使用參數)  
+回傳運算過後的結果(不接收/使用參數), 使用: getFirst, this.getFirst  
 ```
 const app = new Vue({
     el: '#app',
@@ -117,7 +117,7 @@ const app = new Vue({
 }
 ```
 ## methods
-單純是個放方法的地方  
+單純是個放方法的地方，調用: doSomeThing(), this.doSomeThing  
 ```
 const app = new Vue({
     el: '#app',
