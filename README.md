@@ -117,7 +117,7 @@ const app = new Vue({
 }
 ```
 ## methods
-單純是個放方法的地方，調用: doSomeThing(), this.doSomeThing  
+單純是個放方法的地方，調用: doSomeThing(), this.doSomeThing()  
 ```
 const app = new Vue({
     el: '#app',
