@@ -6,6 +6,8 @@
 *  <a href="#v-for">v-for</a>
 *  <a href="#v-on">v-on</a>
 *  <a href="#v-model">v-model</a>
+*  <a href="#computed">computed</a>
+*  <a href="#methods">methods</a>
 *  <a href="#watch">watch</a>
 *  <a href="#Component">Component</a>
 *  <a href="#接取component的資料emit">接取Component的資料($emit)</a>
@@ -99,6 +101,33 @@ const app = new Vue({
 {{ message }}
 ```
 
+## computed
+回傳運算過後的結果(不接收/使用參數)  
+```
+const app = new Vue({
+    el: '#app',
+    data: { 
+        list: [1,2,3]
+    },
+    computed: {
+        getFirst: function() {
+            return this.list[0]
+        }
+    }
+}
+```
+## methods
+單純是個放方法的地方  
+```
+const app = new Vue({
+    el: '#app',
+    methods: {
+        doSomeThing: function() {
+            // ...
+        }
+    }
+}
+```
 ## watch
 監控某個值，有變化就執行
 ```
