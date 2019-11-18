@@ -104,7 +104,6 @@ const app = new Vue({
 
 document.addEventListener('touchstart', onTouchStart, {passive: true});
 
-
 ```
 ## v-model
 **雙向綁定(哪邊改變都會修改兩邊的值)**  
