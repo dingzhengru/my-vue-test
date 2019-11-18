@@ -89,9 +89,22 @@ const app = new Vue({
 *  v-on:click="doSomething()"
 *  @click="doSomething()"
 *  @click="count++"
+*  .stop, prevent, .capture, .self, .once, .passive
 ```
+// basic
 <button v-on:click="doSomething()">Click</button>
 <button @click="doSomething()">Click</button>
+
+// .stop = stoppropagation: 停止事件傳送 (@click.stop="")
+// .prevent = preventdefault: 取消原本事件要會做的事 (@submit.prevent="")
+// .capture: 本來事件接收是預設在冒泡階段，這會把它改到捕獲階段
+// .self: 條件設為event.target為自己的時候才會觸發
+// .once: 只會觸發一次
+// .passive: 主要用於提升滾動性能(避免手機滑動卡卡的)，做的事等同於下面那行第三個參數
+
+document.addEventListener('touchstart', onTouchStart, {passive: true});
+
+
 ```
 ## v-model
 **雙向綁定(哪邊改變都會修改兩邊的值)**  
