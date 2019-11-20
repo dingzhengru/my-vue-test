@@ -24,6 +24,11 @@ const app = new Vue({
     computed: {
         xxxFilter: function() {
             return ...;
+        },
+        getxxxById: (app) => (id) => {
+            // app是指這個app就等於在這裡用的this
+            // id是自己設的參數，使用: getxxxById(id)
+            return app.data[id];
         }
     },
     methods: {
@@ -114,7 +119,8 @@ document.addEventListener('touchstart', onTouchStart, {passive: true});
 ```
 
 ## computed
-回傳運算過後的結果(不接收/使用參數), 使用: getFirst, this.getFirst  
+*  回傳運算過後的結果, 使用: getFirst, this.getFirst
+*  接收參數用法，```getDataById: (app) => (id) => { ... }```，使用: getDataById(id)
 ```
 const app = new Vue({
     el: '#app',
@@ -124,6 +130,11 @@ const app = new Vue({
     computed: {
         getFirst: function() {
             return this.list[0]
+        }
+        getDataById: (app) => (id) => {
+            // app是指這個app就等於在這裡用的this
+            // id是自己設的參數，使用: getxxxById(id)
+            return app.list[id];
         }
     }
 }
