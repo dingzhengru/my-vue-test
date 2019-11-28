@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Vue test</title>
 
-    <style>
-        @import url("public/min/css/test.css")
-    </style>
+    <link rel="stylesheet" href="./public/css/test.css">
 </head>
 <body>
     <!-- v-bind -->
@@ -352,6 +350,17 @@
                  leave-active-class="slide-leave-active">
                 <p v-if="show" class="anime-test">hello </p>
             </transition>
+        </div>
+        <div>
+            <h2>更簡單的用法</h2>
+            <p>transition設定動畫屬性 {transition: all 0.3s ease-in-out;}</p>
+            <p>用:style去綁定要改變的屬性 :style="{ width: inputWidth }"</p>
+            <p>再靠@event去改變屬性值就好 @focus="" @blur=""</p>
+            <input type="text"
+                    class="easy-anime-test"
+                    :style="{ width: inputWidth }"
+                   @focus="widenInputWidth()"
+                   @blur="narrowInputWidth()">
         </div>
     </div>
     <footer></footer>

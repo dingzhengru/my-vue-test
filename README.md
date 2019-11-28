@@ -9,6 +9,7 @@
 *  <a href="#computed">computed</a>
 *  <a href="#methods">methods</a>
 *  <a href="#watch">watch</a>
+*  <a href="#animate">animate</a>
 *  <a href="#Component">Component</a>
 *  <a href="#接取component的資料emit">接取Component的資料($emit)</a>
 
@@ -163,6 +164,37 @@ const app = new Vue({
         username: function(newValue, oldValue) {
             // ...
         }
+    }
+}
+```
+
+## animate
+
+*  其實只要用transition直接選 all 或只指定變動的屬性(transition: width 0.3s ease-in-out;)
+*  剩下就自己指定事件去做屬性變更即可(ex: focus 就把width變大, blur 就把他小回原大小)
+*  transition: property || duration || delay || timing-function  [, ...];
+*  transition: all 0.5s ease-in-out; / transition: width 0.5s ease-in-out;
+
+```
+<input type="text" 
+        :style="{ width: inputWidth }" 
+        @focus="widenInputWidth()"
+        @blur="narrowInputWidth()">
+
+input {
+    transition: width 0.3s ease-in-out;
+}
+```
+```
+data: {
+    inputWidth: '100px'
+},
+methods: {
+    widenInputWidth: function() {
+        this.inputWidth = '300px';
+    },
+    narrowInputWidth: function() {
+        this.inputWidth = '100px';
     }
 }
 ```

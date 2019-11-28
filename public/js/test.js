@@ -424,5 +424,16 @@ var app19 = new Vue({
     el: '#app19',
     data: {
         show: false,
+        inputWidth: '100px',
     },
+    methods: {
+        widenInputWidth: function() {
+            // 變寬
+            this.inputWidth = '300px';
+        },
+        narrowInputWidth: function() {
+            // 變窄回原樣
+            this.inputWidth = '100px';
+        },
+    }
 })

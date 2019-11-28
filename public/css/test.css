@@ -19,6 +19,12 @@ footer{
 }
 
 /* Animation */
+
+.easy-anime-test {
+    background-color: blue;
+    transition: width 1s ease-in-out;
+}
+
 .anime-test {
     height: 100px;
     background-color: red;
