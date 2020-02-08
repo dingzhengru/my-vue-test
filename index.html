@@ -363,6 +363,31 @@
                    @blur="narrowInputWidth()">
         </div>
     </div>
+    <div id="app20">
+        <h1>Filter</h1>
+        <div>
+            <p>
+                取偶數、奇數，filter 接收到的 value 會是整個值
+            </p>
+            <p>
+                {{ nums }}
+            </p>
+            <p>
+                {{ nums | evens }}
+            </p>
+            <p>
+                {{ nums | odds }}
+            </p>
+        </div>
+        <div>
+            <p>
+                先取 3 的倍數，再取 5 的倍數
+            </p>
+            <p>
+                {{ nums | factor3 | factor5 }}
+            </p>
+        </div>
+    </div>
     <footer></footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
