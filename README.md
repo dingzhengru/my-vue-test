@@ -12,6 +12,7 @@
 *  <a href="#animate">animate</a>
 *  <a href="#Component">Component</a>
 *  <a href="#接取component的資料emit">接取Component的資料($emit)</a>
+*  <a href="#動態載入Component">動態載入 Component</a>
 
 ```
 const app = new Vue({
@@ -270,4 +271,30 @@ const app = new Vue({
         }
     }
 })
+```
+
+## 動態載入Component
+* 使用到時才會載入
+* 動態載入語法一律是: ```() => import(`@/components/LayoutZ.vue`)```
+* 可以用 :is 來切換 component
+* 參考此答案: https://stackoverflow.com/a/53406634/5134658
+
+
+``` js
+export default {
+  components: {
+    'test-dynamic': () => import('@/components/testDynamic'),
+    'other-dynamic': () => import('@/components/otherDynamic')
+  },
+  data () {
+    return {
+      current: 'test-dynamic'
+    }
+  }
+}
+```
+
+可以用 :is 來切換
+``` xml
+<component :is="current"></component>
 ```
