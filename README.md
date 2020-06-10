@@ -1,4 +1,5 @@
-# Vue test
+# Vue memo
+Vue2 筆記
 
 *  <a href="生命週期">生命週期</a>
 *  <a href="#v-bind">v-bind</a>
