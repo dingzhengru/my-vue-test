@@ -1,403 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Vue test</title>
+  <meta charset="UTF-8">
+  <title>Vue test</title>
 
-    <link rel="stylesheet" href="./test.css">
+  <link rel="stylesheet" href="./test.css">
 </head>
+
 <body>
+  <!-- v-bind -->
+  <div id="app">
+    <input type="text" :value="message">
+    {{ message }}
+  </div>
+
+  <!-- v-if -->
+  <div id="app2">
+    <span v-if="seen">seen = true</span>
+    <span v-if="!seen">seen = false</span>
+  </div>
+
+  <!-- v-for -->
+  <div id="app3">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+
+  <!-- handle input -->
+  <div id="app4">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
+  </div>
+
+  <!-- v-model -->
+  <div id="app5">
+    <p>{{ message }}</p>
+    <input type="text" v-model="message">
+  </div>
+
+  <!-- template and props-->
+  <div id="app6">
+    <greeter name="Ding"></greeter>
+    <!-- <greeter inline-template></greeter> -->
+  </div>
+
+  <!-- Data and Methods -->
+  <h1>Data and Methods</h1>
+  <div id="app7">
+    <p>{{ foo }}</p>
+    <!-- this will no longer update `foo`! -->
+    <button v-on:click="foo = 'baz'">Change it(Freez)</button>
+  </div>
+
+  <!-- Template Syntax -->
+  <h1>Template Syntax</h1>
+  <div id="app8">
+    <span>Message: {{ msg }}</span><br>
+    <!-- *v-once -->
+    <span v-once>[v-once]This will never change: {{ msg }}</span>
+    <!-- *v-html (Raw HTML) -->
+    <p>Using mustaches: {{ rawHtml }}</p>
+    <p>Using v-html : <span v-html="rawHtml"></span></p>
+    <!-- *v-bind  v-bind:disabled = :disabled (Attributes) -->
+    <button :disabled="isButtonDisabled">Button</button>
+    <!-- *Using JavaScript Expressions -->
+    <h2>Using JavaScript Expressions</h2>
+    <p>{{ number + 1 }}</p>
+    <p>{{ 1==1 ? 'YES' : 'NO' }} {{ 1==2 ? 'YES' : 'NO' }}</p> <!-- ok為true 回傳第一個 反之回傳第二個 -->
+    <p>{{ msg.split('').reverse().join('') }}</p> <!-- reverse string -->
+    <!-- *Directives -->
+    <h2>Directives</h2>
+    <p v-if="1==1">Now you see me</p>
+    <!-- *Arguments (用v-bind綁定屬性) -->
+    <h2>Arguments</h2>
+    <a v-bind:href="url">URL:{{ url }}</a>
+    <!-- *Modifiers -->
+    <h2>Modifiers</h2>
+    <!-- .prevent = event.preventDefault() 會"阻止原本會發生的事件" 以下會阻止提交表單與重整頁面的事件 -->
+    <form v-on:submit.prevent="onSubmit">
+      <button type="submit">Submit</button>
+    </form>
+    <!-- *Shorthands 簡寫 -->
+    <h2>Shorthands</h2>
     <!-- v-bind -->
-    <div id="app">
-        <input type="text" :value="message">
-        {{ message }}
+    <!-- full syntax -->
+    <a v-bind:href="url">URL:{{ url }}</a>
+    <!-- shorthand -->
+    <a :href="url">URL:{{ url }}</a>
+    <!-- shorthand with dynamic argument (attr可以自行填入屬性)-->
+    <a :[attr]="url"> [attr]=href URL:{{ url }} </a><br>
+    <!-- v-on Shorthand v-on = @ = @[event] -->
+    <!-- full syntax -->
+    <p v-on:click="doSomething('click full syntax')">full syntax</p>
+    <!-- shorthand -->
+    <p @mouseover="doSomething('mouseover shorthand')">shorthand</p>
+    <!-- shorthand with dynamic argument (2.6.0+) -->
+    <p @[e]="doSomething('event: ' + e)"> shorthand with dynamic argument</p>
+  </div>
+  <div id="app9">
+    <h1>Computed Properties and Watchers</h1>
+    <h2>Computed Properties</h2>
+    <p>Original message: "{{ msg }}"</p>
+    <p>Computed reversed message: "{{ reverseText(msg) }}"</p>
+    <h2>Watch</h2>
+    <p>請輸入使用者名稱</p>
+    <input type="text" v-model="username"> {{ errMsg }}
+  </div>
+  <div id="app10">
+    <h1>Class and Style Bindings</h1>
+    <h2>Class</h2>
+    <div v-bind:class="{'static': isGood, 'text-danger': hasError }">
+      hasError
     </div>
-    
-    <!-- v-if -->
-    <div id="app2">
-        <span v-if="seen">seen = true</span>
-        <span v-if="!seen">seen = false</span>
+    <!-- Use classObject -->
+    <div v-bind:class="classObject">isGood</div>
+    <!-- Use Function return -->
+    <div v-bind:class="classFunction()">Function return</div>
+    <!-- Use Array -->
+    <div v-bind:class="[activeClass, errorClass]">Array</div>
+    <!-- With Component -->
+    <!-- <my-component class="baz boo"></my-component> -->
+    <!-- <my-component v-bind:class="{ active: isActive }"></my-component> -->
+    <h2>Style</h2>
+    <div v-bind:style="{ 'background-color': activeColor, 'font-size': activeFontSize + 'px' }">
+      test style
     </div>
+    <!-- Multiple Values -->
+    <div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+      Multiple Values
+    </div>
+  </div>
+  <div id="app11">
+    <h1>Conditional Rendering</h1>
+    <div v-if="type === 'A'">A</div>
+    <div v-else-if="type === 'B'">B</div>
+    <div v-else-if="type === 'C'">C</div>
+    <div v-else>Not A/B/C</div>
+  </div>
+  <div id="app12">
+    <h1>List Rendering</h1>
+    <h2>Mapping an Array to Elements with v-for</h2>
+    <!-- v-for="(value, key) in array" -->
+    <!-- v-for="(value, key, index) in object" -->
+    <ul>
+      <li v-for="(item, index) in items">
+        {{ index }} - {{ item.message }}
+      </li>
+    </ul>
+    <h2>v-for with an Object</h2>
+    <ul>
+      <li v-for="(value, key, index) in obj">
+        {{ index }} - {{ key }} - {{ value }}
+      </li>
+    </ul>
+    <h2>Array Change Detection</h2>
+    <!-- Mutation Methods -->
+    <!-- push() pop() shift() unshift() splice() sort() reverse() -->
+    <h2>Replacing an Array</h2>
+    <!-- Vue.set() = vm.$set(), vm.splice() -->
+    <!-- Use Vue.set(app12.items, indexOfItem, newValue) -->
+    <!-- Use app12.$set(app12.items, indexOfItem, newValue) 跟上面效果一樣 -->
+    <!-- Use app12.items.splice(indexOfItem, 1, newValue) -->
+    <button v-on:click="setNewItems()">Set new items</button>
+    <button v-on:click="setOldItems()">Set old items</button>
+    <button v-on:click="setNewObject()">Set new Object</button>
+    <button v-on:click="setOldObject()">Set old Object</button>
+  </div>
+  <div id="app13">
+    <h1>Filtered/Sorted Results</h1>
+    <ul>
+      <li v-for="n in numbers">{{ n }}</li>
+    </ul>
+    <h3>Filter Even</h3>
+    <ul>
+      <li v-for="n in even(numbers)">{{ n }}</li>
+    </ul>
+    <h3>v-for with a Range</h3>
+    <div>
+      <span v-for="n in 10">{{ n }} </span>
+    </div>
+    <h1>Search</h1>
+    <input v-model="searchText">
+    <ul>
+      <li v-for="(product,index) in productsFilter">
+        {{ index }} {{ product.name }}
+      </li>
+    </ul>
+  </div>
+  <div id="app14">
+    <h1>Create Add/Remove List</h1>
+    <input type="text" v-model="inputText">
+    <button v-on:click="addNode({ text: inputText })">add</button>
+    <ul>
+      <li v-for="(node, index) in nodes">
+        {{ index }} - {{ node.text }}
+        <button v-on:click="removeNode(node, index)">remove</button>
+      </li>
+    </ul>
+  </div>
+  <div id="app15">
+    <h1>Method Event Handlers</h1>
+    <button v-on:click="clickEvent('aaa',event)" id="123123" style="color:red;">Click</button>
+    <h2>Event Modifiers(.stop .prevent .capture .self .once .passive)</h2>
+    <!-- .stop：等同於event.stopPropagation()，防止事件冒泡。 -->
+    <!-- .prevent：等同於event.preventDefault()，防止執行預設的行為。 -->
+    <!-- .capture：與事件冒泡的方向相反，事件捕獲 (event capturing) 是由外而內的。 -->
+    <!-- .self：只會觸發自己範圍內的事件，不包含子元素。 -->
+    <!-- .once：只會觸發一次 -->
+    <!-- 詳細說明(中文): https://cythilya.github.io/2017/04/17/vue-methods-and-event-handling/ -->
+    <!-- 防冒泡: 點內部事件不會觸發外部的，ex:點內部alert不會觸發外部的alert -->
+    <!-- 防止執行預設的行為，ex:表單不會重整網頁、 點擊href="#"網址不會出現#-->
+    <a @click.stop="doThis" href="#">click.stop</a>
+    <form @submit.prevent="doThis">submit.prevent</form>
+    <a @click.stop.prevent="doThat" href="#">click.stop.prevent</a>
+    <form @submit.prevent>submit.prevent</form>
+    <div @click.capture="doThis">click.capture</div>
+    <div @click.self="doThat">click.self</div>
+    <h3>.passive</h3>
+    <!-- the scroll event's default behavior (scrolling) will happen -->
+    <!-- immediately, instead of waiting for `onScroll` to complete  -->
+    <!-- in case it contains `event.preventDefault()`                -->
+    <div @scroll.passive="onScroll">scroll.passive</div>
 
-    <!-- v-for -->
-    <div id="app3">
-        <ol>
-            <li v-for="todo in todos">
-                {{ todo.text }}
-            </li>
-        </ol>
+    <h2>Key Modifiers</h2>
+    <!-- Key的英文名列表: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values -->
+    <input @keyup.enter="onEnter" value="@keyup.enter">
+    <h2>Key Codes</h2>
+    <!-- Key code: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode -->
+    <input @keyup.32="onSpace" value="@keyup.32(space)">
+    <h2>.exact Modifier</h2>
+    <!-- this will only fire when Ctrl and no other keys are pressed -->
+    <input @keyup.ctrl.exact="onOnlyCtrl" value="keyup.ctrl.exact(not working)">
+  </div>
+  <div id="app16">
+    <h1>Form Input Bindings</h1>
+    <input v-model="msg" placeholder="edit me">
+    <p>Message is: {{ msg }}</p>
+    <h2>Checkbox</h2>
+    <input type="checkbox" id="jack" value="value-Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="value-John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="value-Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <p>Checked names: {{ checkedNames }}</p>
+    <h2>Radio</h2>
+    <input type="radio" id="one" value="value-One" v-model="picked">
+    <label for="one">One</label>
+    <input type="radio" id="two" value="value-Two" v-model="picked">
+    <label for="two">Two</label>
+    <p>Picked: {{ picked }}</p>
+    <h2>Select</h2>
+    <select v-model="selected">
+      <option disabled selected value="default000">Please select one</option>
+      <option value="value-A">A</option>
+      <option value="value-B">B</option>
+      <option value="value-C">C</option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+    <h2>Value Bindings</h2>
+    <input type="checkbox" v-model="checkboxValue" true-value="this is true-value" false-value="this is false-value">
+    checkboxValue: {{ checkboxValue }}
+    <input type="radio" v-model="radioValue" v-bind:value="a">
+    radioValue {{ radioValue }}
+    <h3>Multi Select</h3>
+    利用Ctrl or Shift多選 <br>
+    <select v-model="multiSelected" multiple>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    multiSelected = {{ multiSelected }}
+    <h2>Modifiers 修飾符</h2>
+    <!-- .lazy 使用.lazy會改用 change 事件監聽 -->
+    <!-- ex: 更改 input 內的值並不會馬上變更 model 的資料，而是等到滑鼠移到輸入框外 -->
+    <!-- .number 將字串轉為數字。 -->
+    <!-- .trim 去除首尾空白。 -->
+    <p><input v-model.lazy="lazyTest"> v-model.lazy: {{ lazyTest }}
+      <p />
+    <p><input v-model.lazy.number="numberTest"> v-model.number: {{ numberTest }} {{ typeof(numberTest) }}
+      <p />
+    <p><input v-model.lazy.trim="trimTest"> v-model.trim: {{ trimTest }}
+      <p />
+  </div>
+  <div id="app17">
+    <h1>Components Basics</h1>
+    <h3>data必須要用function 避免資料共用問題</h3>
+    <button-counter></button-counter>
+    <button-counter></button-counter>
+    <h1>Passing Data to Child Components with Props</h1>
+    <blog-post title="My journey with Vue"></blog-post>
+    <blog-post title="Blogging with Vue"></blog-post>
+    <blog-post title="Why Vue is so fun"></blog-post>
+    <h1>Use v-... in Components</h1>
+    <blog-post v-for="post in posts" v-bind:id="post.id" v-bind:title="post.title"></blog-post>
+    <h2>Good Components</h2>
+    <good-blog-post v-for="post in posts" v-bind:id="post.id" v-bind:post="post"></good-blog-post>
+    <h1>Listening to Child Components Events</h1>
+    <div :style="{ 'font-size': postFontSize + 'em' }">
+      <event-blog-post v-for="post in posts" v-bind:id="post.id" v-bind:post="post" v-on:enlarge-text="onEnlargeText">
+      </event-blog-post>
+      {{ postFontSize }}
     </div>
-
-    <!-- handle input -->
-    <div id="app4">
-        <p>{{ message }}</p>
-        <button v-on:click="reverseMessage">Reverse Message</button>
-    </div>
-
-    <!-- v-model -->
-    <div id="app5">
-        <p>{{ message }}</p>
-        <input type="text" v-model="message">
-    </div>
-
-    <!-- template and props-->
-    <div id="app6">
-        <greeter name="Ding"></greeter>
-        <!-- <greeter inline-template></greeter> -->
-    </div>
-
-    <!-- Data and Methods -->
-    <h1>Data and Methods</h1>
-    <div id="app7">
-         <p>{{ foo }}</p>
-        <!-- this will no longer update `foo`! -->
-        <button v-on:click="foo = 'baz'">Change it(Freez)</button>
-    </div>
-
-    <!-- Template Syntax -->
-    <h1>Template Syntax</h1>
-    <div id="app8">
-        <span>Message: {{ msg }}</span><br>
-        <!-- *v-once -->
-        <span v-once>[v-once]This will never change: {{ msg }}</span>
-        <!-- *v-html (Raw HTML) -->
-        <p>Using mustaches: {{ rawHtml }}</p>
-        <p>Using v-html : <span v-html="rawHtml"></span></p>
-        <!-- *v-bind  v-bind:disabled = :disabled (Attributes) -->
-        <button :disabled="isButtonDisabled">Button</button>
-        <!-- *Using JavaScript Expressions -->
-        <h2>Using JavaScript Expressions</h2>
-        <p>{{ number + 1 }}</p>
-        <p>{{ 1==1 ? 'YES' : 'NO' }} {{ 1==2 ? 'YES' : 'NO' }}</p> <!-- ok為true 回傳第一個 反之回傳第二個 -->
-        <p>{{ msg.split('').reverse().join('') }}</p> <!-- reverse string -->
-        <!-- *Directives -->
-        <h2>Directives</h2>
-        <p v-if="1==1">Now you see me</p>
-        <!-- *Arguments (用v-bind綁定屬性) -->
-        <h2>Arguments</h2>
-        <a v-bind:href="url">URL:{{ url }}</a>
-        <!-- *Modifiers -->
-        <h2>Modifiers</h2>
-        <!-- .prevent = event.preventDefault() 會"阻止原本會發生的事件" 以下會阻止提交表單與重整頁面的事件 -->
-        <form v-on:submit.prevent="onSubmit"> 
-            <button type="submit">Submit</button>
-        </form>
-        <!-- *Shorthands 簡寫 -->
-        <h2>Shorthands</h2>
-        <!-- v-bind -->
-        <!-- full syntax -->
-        <a v-bind:href="url">URL:{{ url }}</a>
-        <!-- shorthand -->
-        <a :href="url">URL:{{ url }}</a>
-        <!-- shorthand with dynamic argument (attr可以自行填入屬性)-->
-        <a :[attr]="url"> [attr]=href URL:{{ url }} </a><br>
-        <!-- v-on Shorthand v-on = @ = @[event] -->
-        <!-- full syntax -->
-        <p v-on:click="doSomething('click full syntax')">full syntax</p>
-        <!-- shorthand -->
-        <p @mouseover="doSomething('mouseover shorthand')">shorthand</p>
-        <!-- shorthand with dynamic argument (2.6.0+) -->
-        <p @[e]="doSomething('event: ' + e)"> shorthand with dynamic argument</p>
-    </div>
-    <div id="app9">
-        <h1>Computed Properties and Watchers</h1>
-        <h2>Computed Properties</h2>
-        <p>Original message: "{{ msg }}"</p>
-        <p>Computed reversed message: "{{ reverseText(msg) }}"</p>
-        <h2>Watch</h2>
-        <p>請輸入使用者名稱</p>
-        <input type="text" v-model="username"> {{ errMsg }}
-    </div>
-    <div id="app10">
-        <h1>Class and Style Bindings</h1>
-        <h2>Class</h2>
-        <div v-bind:class="{'static': isGood, 'text-danger': hasError }">
-            hasError
-        </div>
-        <!-- Use classObject -->
-        <div v-bind:class="classObject">isGood</div>
-        <!-- Use Function return -->
-        <div v-bind:class="classFunction()">Function return</div>
-        <!-- Use Array -->
-        <div v-bind:class="[activeClass, errorClass]">Array</div>
-        <!-- With Component -->
-        <!-- <my-component class="baz boo"></my-component> -->
-        <!-- <my-component v-bind:class="{ active: isActive }"></my-component> -->
-        <h2>Style</h2>
-        <div v-bind:style="{ 'background-color': activeColor, 'font-size': activeFontSize + 'px' }">
-            test style
-        </div>
-        <!-- Multiple Values -->
-        <div v-bind:style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
-            Multiple Values
-        </div>
-    </div>
-    <div id="app11">
-        <h1>Conditional Rendering</h1>
-        <div v-if="type === 'A'">A</div>
-        <div v-else-if="type === 'B'">B</div>
-        <div v-else-if="type === 'C'">C</div>
-        <div v-else>Not A/B/C</div>
-    </div>
-    <div id="app12">
-        <h1>List Rendering</h1>
-        <h2>Mapping an Array to Elements with v-for</h2>
-        <!-- v-for="(value, key) in array" -->
-        <!-- v-for="(value, key, index) in object" -->
-        <ul>
-            <li v-for="(item, index) in items">
-                {{ index }} - {{ item.message }}
-            </li>
-        </ul>
-        <h2>v-for with an Object</h2>
-        <ul>
-            <li v-for="(value, key, index) in obj">
-               {{ index }} - {{ key }} - {{ value }}
-            </li>
-        </ul>
-        <h2>Array Change Detection</h2>
-        <!-- Mutation Methods -->
-        <!-- push() pop() shift() unshift() splice() sort() reverse() -->
-        <h2>Replacing an Array</h2>
-        <!-- Vue.set() = vm.$set(), vm.splice() -->
-        <!-- Use Vue.set(app12.items, indexOfItem, newValue) -->
-        <!-- Use app12.$set(app12.items, indexOfItem, newValue) 跟上面效果一樣 -->
-        <!-- Use app12.items.splice(indexOfItem, 1, newValue) -->
-        <button v-on:click="setNewItems()">Set new items</button>
-        <button v-on:click="setOldItems()">Set old items</button>  
-        <button v-on:click="setNewObject()">Set new Object</button>
-        <button v-on:click="setOldObject()">Set old Object</button> 
-    </div>
-    <div id="app13">
-        <h1>Filtered/Sorted Results</h1>
-        <ul>
-            <li v-for="n in numbers">{{ n }}</li>
-        </ul>
-        <h3>Filter Even</h3>
-        <ul>
-            <li v-for="n in even(numbers)">{{ n }}</li>
-        </ul>
-        <h3>v-for with a Range</h3>
-        <div>
-            <span v-for="n in 10">{{ n }} </span>
-        </div>
-        <h1>Search</h1>
-        <input v-model="searchText">
-        <ul>
-            <li v-for="(product,index) in productsFilter">
-                {{ index }} {{ product.name }}
-            </li>
-        </ul>
-    </div>
-    <div id="app14">
-        <h1>Create Add/Remove List</h1>
-        <input type="text" v-model="inputText">
-        <button v-on:click="addNode({ text: inputText })">add</button>
-        <ul>
-            <li v-for="(node, index) in nodes">
-                {{ index }} - {{ node.text }}
-                <button v-on:click="removeNode(node, index)">remove</button>
-            </li>
-        </ul>
-    </div>
-    <div id="app15">
-        <h1>Method Event Handlers</h1>
-        <button v-on:click="clickEvent('aaa',event)" id="123123" style="color:red;">Click</button>
-        <h2>Event Modifiers(.stop .prevent .capture .self .once .passive)</h2>
-        <!-- .stop：等同於event.stopPropagation()，防止事件冒泡。 -->
-        <!-- .prevent：等同於event.preventDefault()，防止執行預設的行為。 -->
-        <!-- .capture：與事件冒泡的方向相反，事件捕獲 (event capturing) 是由外而內的。 -->
-        <!-- .self：只會觸發自己範圍內的事件，不包含子元素。 -->
-        <!-- .once：只會觸發一次 -->
-        <!-- 詳細說明(中文): https://cythilya.github.io/2017/04/17/vue-methods-and-event-handling/ -->
-        <!-- 防冒泡: 點內部事件不會觸發外部的，ex:點內部alert不會觸發外部的alert -->
-        <!-- 防止執行預設的行為，ex:表單不會重整網頁、 點擊href="#"網址不會出現#-->
-        <a @click.stop="doThis" href="#">click.stop</a>
-        <form @submit.prevent="doThis">submit.prevent</form>
-        <a @click.stop.prevent="doThat" href="#">click.stop.prevent</a>
-        <form @submit.prevent>submit.prevent</form>
-        <div @click.capture="doThis">click.capture</div>
-        <div @click.self="doThat">click.self</div>
-        <h3>.passive</h3>
-        <!-- the scroll event's default behavior (scrolling) will happen -->
-        <!-- immediately, instead of waiting for `onScroll` to complete  -->
-        <!-- in case it contains `event.preventDefault()`                -->
-        <div @scroll.passive="onScroll">scroll.passive</div>
-
-        <h2>Key Modifiers</h2>
-        <!-- Key的英文名列表: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values -->
-        <input @keyup.enter="onEnter" value="@keyup.enter">
-        <h2>Key Codes</h2>
-        <!-- Key code: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode -->
-        <input @keyup.32="onSpace" value="@keyup.32(space)">
-        <h2>.exact Modifier</h2>
-        <!-- this will only fire when Ctrl and no other keys are pressed -->
-        <input @keyup.ctrl.exact="onOnlyCtrl" value="keyup.ctrl.exact(not working)">
-    </div>
-    <div id="app16">
-        <h1>Form Input Bindings</h1>
-        <input v-model="msg" placeholder="edit me">
-        <p>Message is: {{ msg }}</p>
-        <h2>Checkbox</h2>
-        <input type="checkbox" id="jack" value="value-Jack" v-model="checkedNames">
-        <label for="jack">Jack</label>
-        <input type="checkbox" id="john" value="value-John" v-model="checkedNames">
-        <label for="john">John</label>
-        <input type="checkbox" id="mike" value="value-Mike" v-model="checkedNames">
-        <label for="mike">Mike</label>
-        <p>Checked names: {{ checkedNames }}</p>
-        <h2>Radio</h2>
-        <input type="radio" id="one" value="value-One" v-model="picked">
-        <label for="one">One</label>
-        <input type="radio" id="two" value="value-Two" v-model="picked">
-        <label for="two">Two</label>
-        <p>Picked: {{ picked }}</p>
-        <h2>Select</h2>
-        <select v-model="selected">
-            <option disabled selected value="default000">Please select one</option>
-            <option value="value-A">A</option>
-            <option value="value-B">B</option>
-            <option value="value-C">C</option>
-        </select>
-        <span>Selected: {{ selected }}</span>
-        <h2>Value Bindings</h2>
-        <input type="checkbox" v-model="checkboxValue" true-value="this is true-value" false-value="this is false-value">
-        checkboxValue: {{ checkboxValue }}
-        <input type="radio" v-model="radioValue" v-bind:value="a">
-        radioValue {{ radioValue }}
-        <h3>Multi Select</h3>
-        利用Ctrl or Shift多選 <br>
-        <select v-model="multiSelected" multiple>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
-        </select>
-        multiSelected = {{ multiSelected }}
-        <h2>Modifiers 修飾符</h2>
-        <!-- .lazy 使用.lazy會改用 change 事件監聽 -->
-        <!-- ex: 更改 input 內的值並不會馬上變更 model 的資料，而是等到滑鼠移到輸入框外 -->
-        <!-- .number 將字串轉為數字。 -->
-        <!-- .trim 去除首尾空白。 -->
-        <p><input v-model.lazy="lazyTest"> v-model.lazy: {{ lazyTest }}<p/>
-        <p><input v-model.lazy.number="numberTest"> v-model.number: {{ numberTest }} {{ typeof(numberTest) }}<p/>
-        <p><input v-model.lazy.trim="trimTest"> v-model.trim: {{ trimTest }}<p/>
-    </div>
-    <div id="app17">
-        <h1>Components Basics</h1>
-        <h3>data必須要用function 避免資料共用問題</h3>
-        <button-counter></button-counter>
-        <button-counter></button-counter>
-        <h1>Passing Data to Child Components with Props</h1>
-        <blog-post title="My journey with Vue"></blog-post>
-        <blog-post title="Blogging with Vue"></blog-post>
-        <blog-post title="Why Vue is so fun"></blog-post>
-        <h1>Use v-... in Components</h1>
-        <blog-post
-            v-for="post in posts"
-            v-bind:id="post.id"
-            v-bind:title="post.title"
-        ></blog-post>
-        <h2>Good Components</h2>
-        <good-blog-post
-            v-for="post in posts"
-            v-bind:id="post.id"
-            v-bind:post="post"
-        ></good-blog-post>
-        <h1>Listening to Child Components Events</h1>
-        <div :style="{ 'font-size': postFontSize + 'em' }">
-            <event-blog-post
-                v-for="post in posts"
-                v-bind:id="post.id"
-                v-bind:post="post"
-                v-on:enlarge-text="onEnlargeText"
-            ></event-blog-post>
-            {{ postFontSize }}
-        </div>
-        <h2>Using v-model on Components</h2>
-        <custom-input v-model="searchText"></custom-input>
-    </div>
-    <div id="app18">
-        <h1>Component Registration</h1>
-        <h2>Component Names(Component的命名)</h2>
-        <p>有兩種命名方式</p>
-        <p>kebab-case: my-component-name</p>
-        <p>PascalCase: MyComponentName</p>
-        <p>兩者都可以使用，但前者對DOM直接有效(valid directly in the DOM)</p>
-        <h2>Global Registration</h2>
-        Vue.component('component-a', { /* ... */ })<br>
-        Vue.component('component-b', { /* ... */ })<br>
-        Vue.component('component-c', { /* ... */ })
-        <h2>Local Registration</h2>
-        new Vue({
-            el: '#app',
-            components: {
-                'component-a': ComponentA,
-                'component-b': ComponentB
-            }
-        })
-    </div>
-    <div id="app19">
-        <h1>Animation</h1>
-        <div id="demo">
-            <button v-on:click="show = !show">
-                Toggle
-            </button>
-<!--             <transition name="fade">
+    <h2>Using v-model on Components</h2>
+    <custom-input v-model="searchText"></custom-input>
+  </div>
+  <div id="app18">
+    <h1>Component Registration</h1>
+    <h2>Component Names(Component的命名)</h2>
+    <p>有兩種命名方式</p>
+    <p>kebab-case: my-component-name</p>
+    <p>PascalCase: MyComponentName</p>
+    <p>兩者都可以使用，但前者對DOM直接有效(valid directly in the DOM)</p>
+    <h2>Global Registration</h2>
+    Vue.component('component-a', { /* ... */ })<br>
+    Vue.component('component-b', { /* ... */ })<br>
+    Vue.component('component-c', { /* ... */ })
+    <h2>Local Registration</h2>
+    new Vue({
+    el: '#app',
+    components: {
+    'component-a': ComponentA,
+    'component-b': ComponentB
+    }
+    })
+  </div>
+  <div id="app19">
+    <h1>Animation</h1>
+    <div id="demo">
+      <button v-on:click="show = !show">
+        Toggle
+      </button>
+      <!--             <transition name="fade">
                 <p v-if="show">hello </p>
             </transition> -->
-            <transition 
-                 enter-active-class="slide-enter-active" 
-                 leave-active-class="slide-leave-active">
-                <p v-if="show" class="anime-test">hello </p>
-            </transition>
-        </div>
-        <div>
-            <h2>更簡單的用法</h2>
-            <p>transition設定動畫屬性 {transition: all 0.3s ease-in-out;}</p>
-            <p>用:style去綁定要改變的屬性 :style="{ width: inputWidth }"</p>
-            <p>再靠@event去改變屬性值就好 @focus="" @blur=""</p>
-            <input type="text"
-                    class="easy-anime-test"
-                    :style="{ width: inputWidth }"
-                   @focus="widenInputWidth()"
-                   @blur="narrowInputWidth()">
-        </div>
+      <transition enter-active-class="slide-enter-active" leave-active-class="slide-leave-active">
+        <p v-if="show" class="anime-test">hello </p>
+      </transition>
     </div>
-    <div id="app20">
-        <h1>Filter</h1>
-        <div>
-            <p>
-                取偶數、奇數，filter 接收到的 value 會是整個值
-            </p>
-            <p>
-                {{ nums }}
-            </p>
-            <p>
-                {{ nums | evens }}
-            </p>
-            <p>
-                {{ nums | odds }}
-            </p>
-        </div>
-        <div>
-            <p>
-                先取 3 的倍數，再取 5 的倍數
-            </p>
-            <p>
-                {{ nums | factor3 | factor5 }}
-            </p>
-        </div>
+    <div>
+      <h2>更簡單的用法</h2>
+      <p>transition設定動畫屬性 {transition: all 0.3s ease-in-out;}</p>
+      <p>用:style去綁定要改變的屬性 :style="{ width: inputWidth }"</p>
+      <p>再靠@event去改變屬性值就好 @focus="" @blur=""</p>
+      <input type="text" class="easy-anime-test" :style="{ width: inputWidth }" @focus="widenInputWidth()"
+        @blur="narrowInputWidth()">
     </div>
-    <footer></footer>
+  </div>
+  <div id="app20">
+    <h1>Filter</h1>
+    <div>
+      <p>
+        取偶數、奇數，filter 接收到的 value 會是整個值
+      </p>
+      <p>
+        {{ nums }}
+      </p>
+      <p>
+        {{ nums | evens }}
+      </p>
+      <p>
+        {{ nums | odds }}
+      </p>
+    </div>
+    <div>
+      <p>
+        先取 3 的倍數，再取 5 的倍數
+      </p>
+      <p>
+        {{ nums | factor3 | factor5 }}
+      </p>
+    </div>
+  </div>
+  <footer></footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
-    <script src="./test.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+  <script src="./test.js"></script>
 
-    <script>
-        
-    </script>
+  <script>
+
+  </script>
 
 </body>
+
 </html>
-
-
